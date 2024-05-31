@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 
 const TestCard = ({test}) => {
     const { image, price, title, shortDescription, _id } = test;
+    
     return (
         <div>
             <div className="relative flex w-full max-w-[26rem] flex-col rounded-xl bg-white bg-clip-border text-gray-700 shadow-lg">

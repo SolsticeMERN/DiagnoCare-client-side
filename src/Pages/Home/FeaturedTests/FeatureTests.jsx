@@ -6,9 +6,9 @@ const FeatureTests = () => {
   const axiosCommon = useAxiosCommon();
 
   const { data: tests = {}, isLoading } = useQuery({
-    queryKey: ["tests"],
+    queryKey: ["featured-tests"],
     queryFn: async () => {
-      const { data } = await axiosCommon.get("/tests");
+      const { data } = await axiosCommon.get("/featured-tests");
       return data;
     },
   });
@@ -19,7 +19,7 @@ const FeatureTests = () => {
   }
 
   return (
-    <div>
+    <div className="my-20">
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {tests.map((test) => (
           <TestCard key={test._id} test={test} />
