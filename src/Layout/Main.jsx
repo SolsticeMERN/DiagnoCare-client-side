@@ -4,7 +4,7 @@ import Footer from "../Shared/Footer";
 
 const Main = () => {
   return (
-    <div>
+    <div className="work-sans">
       <Navbar />
       <div className="max-w-screen-xl mx-auto p-4 min-h-[68vh]">
         <Outlet />

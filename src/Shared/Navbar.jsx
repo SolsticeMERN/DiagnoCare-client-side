@@ -10,7 +10,7 @@ const Navbar = () => {
       <nav className="bg-white border-gray-200 z-10 shadow-2xl bg-opacity-30 text-black pt-3">
         <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
           
-            <span className="self-center text-blue-600 text-3xl font-bold whitespace-nowrap flex justify-center items-center gap-2">
+            <span className="self-center text-[#009bda] text-3xl font-bold whitespace-nowrap flex justify-center items-center gap-2">
               <img src={icon} className="h-10" alt="" />
               <p>DiagnoCare</p>
             </span>
@@ -18,7 +18,7 @@ const Navbar = () => {
           <div className="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
             <button
               type="button"
-              className=" bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 text-white dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+              className=" bg-[#009bda] hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center text-white dark:hover:bg-blue-700 dark:focus:ring-blue-800"
             >
               Login
             </button>
@@ -57,7 +57,7 @@ const Navbar = () => {
                 <NavLink
                 to='/'
                 className={({ isActive}) =>
-                 isActive ? "block py-2 px-3 md:p-0 bg-blue-700 border-b-2 border-blue-500 md:bg-transparent text-gray-200 rounded-lg md:rounded-none md:dark:text-blue-500" : "text-gray-900"
+                 isActive ? "block py-2 px-3 md:p-0 bg-blue-700 font-semibold border-b-2 border-blue-500 md:bg-transparent text-gray-200 rounded-lg md:rounded-none md:text-blue-500" : "text-gray-900 hover:text-blue-500 hover:border-b-2 hover:border-blue-500"
                 }
                 >
                   Home
@@ -67,7 +67,7 @@ const Navbar = () => {
                 <NavLink
                  to='/doctors'
                  className={({ isActive}) =>
-                  isActive ? "block py-2 px-3 md:p-0 bg-blue-700 border-b-2 border-blue-500 md:bg-transparent text-gray-200 rounded-lg md:rounded-none md:text-blue-500 hover:text-blue-500"  : "text-gray-900"
+                  isActive ? "block py-2 px-3 md:p-0 bg-blue-700 font-semibold border-b-2  border-blue-500 md:bg-transparent text-gray-200 rounded-lg md:rounded-none md:text-blue-500"  : "text-gray-900 hover:text-blue-500 hover:border-b-2 hover:border-blue-500"
                  }
                 >
                   Doctors
@@ -77,7 +77,7 @@ const Navbar = () => {
                 <NavLink
                   to='/appointment'
                   className={({ isActive}) =>
-                    isActive ? "block py-2 px-3 md:p-0 bg-blue-700 border-b-2 border-blue-500 md:bg-transparent text-gray-200 rounded-lg md:rounded-none md:dark:text-blue-500" : "text-gray-900"
+                    isActive ? "block py-2 px-3 md:p-0 bg-blue-700 font-semibold border-b-2 border-blue-500 md:bg-transparent text-gray-200 rounded-lg md:rounded-none md:text-blue-500 " : "text-gray-900 hover:text-blue-500 hover:border-b-2 hover:border-blue-500"
                    }
                 >
                   Appointment
@@ -87,7 +87,7 @@ const Navbar = () => {
                 <NavLink
                   to='/about'
                   className={({ isActive}) =>
-                    isActive ? "block py-2 px-3 md:p-0 bg-blue-700 border-b-2 border-blue-500 md:bg-transparent text-gray-200 rounded-lg md:rounded-none md:dark:text-blue-500" : "text-gray-900"
+                    isActive ? "block py-2 px-3 md:p-0 bg-blue-700 font-semibold border-b-2 border-blue-500 md:bg-transparent text-gray-200 rounded-lg md:rounded-none md:text-blue-500 " : "text-gray-900 hover:text-blue-500 hover:border-b-2 hover:border-blue-500"
                    }
                 >
                   About Us
