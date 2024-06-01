@@ -11,7 +11,7 @@ const Footer = () => {
               <img src={icon} className="h-10" alt="" />
               <p>DiagnoCare</p>
             </span>
-            <ul className="flex flex-wrap items-center mb-6 text-sm font-medium text-gray-100 sm:mb-0">
+            <ul className="flex flex-wrap items-center justify-center my-6 text-sm font-medium text-gray-100 sm:mb-0">
                 <li>
                     <a href="#" className="hover:underline me-4 md:me-6">About</a>
                 </li>
@@ -27,7 +27,7 @@ const Footer = () => {
             </ul>
         </div>
         <hr className="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8" />
-        <span className="block text-sm text-gray-100 sm:text-center ">© {new Date().getFullYear()} <a href="https://flowbite.com/" className="hover:underline text-xl">DiagnoCare</a>. All Rights Reserved.</span>
+        <span className="block text-sm text-gray-100 text-center">© {new Date().getFullYear()} <a href="https://flowbite.com/" className="hover:underline text-xl">DiagnoCare</a>. All Rights Reserved.</span>
     </div>
 </footer>
 

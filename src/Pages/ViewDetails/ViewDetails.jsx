@@ -1,6 +1,8 @@
 import { useParams } from "react-router-dom";
 import useAxiosCommon from "../Hooks/useAxiosCommon";
 import { useQuery } from "@tanstack/react-query";
+import BookingModal from "../../Components/Modal/BookingModal";
+import { useState } from "react";
 
 const ViewDetails = () => {
   const { id } = useParams();
@@ -14,16 +16,19 @@ const ViewDetails = () => {
     },
   });
 
-  console.log(testDetail);
-
   const today = new Date().toLocaleDateString();
-  console.log(today);
+
+  const [isOpen, setIsOpen] = useState(false)
+  const closeModal = () => {
+    setIsOpen(false)
+  }
+
   return (
     <div>
       <h1 className="text-5xl font-bold text-center p-20">Test Details Page</h1>
-      <div key={testDetail._id} className="test-card flex flex-col md:flex-row justify-center items-center gap-10">
-        <div className="flex justify-center mb-5">
-          <img src={testDetail.image} className="rounded-xl" alt={testDetail.title} />
+      <div key={testDetail._id} className="test-card flex flex-col md:flex-row justify-center items-center gap-10 mb-10">
+        <div className="flex justify-center mb-5 px-4">
+          <img src={testDetail.image} className="rounded-xl " alt={testDetail.title} />
         </div>
         <div className="text-center space-y-5">
           <div>
@@ -36,11 +41,13 @@ const ViewDetails = () => {
             <p><span className="font-bold">Price:</span> ${testDetail.price}</p>
           </div>
           <button
+          onClick={() => setIsOpen(!isOpen)}
               type="button"
-              className=" bg-[#009bda] hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center text-white dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+              className=" bg-[#009bda] hover:bg-blue-800  font-medium rounded-lg text-sm px-4 py-2 text-center text-white dark:hover:bg-blue-700"
             >
               Book Now
             </button>
+            <BookingModal closeModal={closeModal} isOpen={isOpen} bookingInfo={testDetail} today={today}/>
         </div>
       </div>
     </div>

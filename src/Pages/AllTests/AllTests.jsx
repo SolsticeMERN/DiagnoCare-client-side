@@ -21,10 +21,10 @@ const AllTests = () => {
 
   return (
     <div>
-      <div className="my-20">
+      <div className="my-20 ">
         <h2 className="text-5xl font-bold text-center">All Tests</h2>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 max-w-screen-xl mx-auto p-4">
         {tests.map((test) => (
           <TestCard key={test._id} test={test} />
         ))}

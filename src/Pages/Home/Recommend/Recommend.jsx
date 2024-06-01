@@ -15,13 +15,25 @@ import { Autoplay, Pagination, Navigation } from "swiper/modules";
 const Recommend = () => {
   const axiosCommon = useAxiosCommon();
 
-  const { data: recommends = {} } = useQuery({
+  const { data: recommends = {}, isLoading, isError } = useQuery({
     queryKey: ["recommend"],
     queryFn: async () => {
       const { data } = await axiosCommon.get("/recommend");
       return data;
     },
   });
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (isError) {
+    return <div>Error loading banners</div>;
+  }
+
+  if (recommends.length === 0) {
+    return <div>No banners available</div>;
+  }
 
   console.log(recommends);
 
