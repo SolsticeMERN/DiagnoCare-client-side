@@ -2,6 +2,7 @@ import Banner from "./Banner/Banner";
 import Doctors from "./Doctor/Doctors";
 import FeatureTests from "./FeaturedTests/FeatureTests";
 import Promotions from "./Promotions/Promotions";
+import Recommend from "./Recommend/Recommend";
 
 const Home = () => {
   return (
@@ -15,6 +16,7 @@ const Home = () => {
       <FeatureTests />
       <Promotions/>
       <Doctors/>
+      <Recommend/>
     </div>
   );
 };
