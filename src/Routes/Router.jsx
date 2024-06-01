@@ -7,6 +7,8 @@ import About from "../Pages/About/About";
 import ViewDetails from "../Pages/ViewDetails/ViewDetails";
 import AllTests from "../Pages/AllTests/AllTests";
 import Doctors from "../Pages/Home/Doctor/Doctors";
+import Register from "../Pages/Register/Register";
+import Login from "../Pages/Login/Login";
   
   const router = createBrowserRouter([
     {
@@ -37,6 +39,14 @@ import Doctors from "../Pages/Home/Doctor/Doctors";
 
       ]
     },
+    {
+      path: '/login',
+      element: <Login/>
+    },
+    {
+      path: '/register',
+      element: <Register/>
+    }
   ]);
 
   export default router;

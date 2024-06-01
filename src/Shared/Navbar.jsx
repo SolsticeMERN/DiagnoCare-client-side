@@ -18,12 +18,14 @@ const Navbar = () => {
             </Link>
          
           <div className="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
+            <Link to='/login'>
             <button
               type="button"
               className=" bg-[#009bda] hover:bg-blue-800  font-medium rounded-lg text-sm px-4 py-2 text-center text-white dark:hover:bg-blue-700"
             >
               Login
             </button>
+            </Link>
             <button
               onClick={() => setIsOpen(!isOpen)}
               data-collapse-toggle="navbar-cta"
