@@ -6,7 +6,8 @@ const Main = () => {
   return (
     <div className="work-sans">
       <Navbar />
-      <div className="max-w-screen-xl mx-auto p-4 min-h-[68vh]">
+      <div className="min-h-[68vh]">
+        {/* max-w-screen-xl mx-auto p-4 */}
         <Outlet />
       </div>
       <Footer/>
