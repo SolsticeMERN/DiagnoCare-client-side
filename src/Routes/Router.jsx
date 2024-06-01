@@ -3,10 +3,10 @@ import {
   } from "react-router-dom";
 import Main from "../Layout/Main";
 import Home from "../Pages/Home/Home";
-import Doctors from "../Pages/Doctors/Doctors";
 import About from "../Pages/About/About";
 import ViewDetails from "../Pages/ViewDetails/ViewDetails";
 import AllTests from "../Pages/AllTests/AllTests";
+import Doctors from "../Pages/Home/Doctor/Doctors";
   
   const router = createBrowserRouter([
     {
