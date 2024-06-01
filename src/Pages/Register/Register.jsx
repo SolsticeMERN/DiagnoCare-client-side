@@ -22,7 +22,7 @@ const Register = () => {
   const axiosCommon = useAxiosCommon()
 
   const onSubmit = async (data) => {
-    console.log(data.email, data.password);
+    console.log(data);
 
     try {
       // Upload image and get image URL
@@ -38,7 +38,11 @@ const Register = () => {
    const userInfo = {
     name: data.name,
     email: data.email,
-    status: "active"
+    status: "active",
+    image: image_url,
+    blood: data.blood,
+    district: data.district,
+    upazila: data.upazila,
    }
 
     axiosCommon.post('/users', userInfo)
@@ -57,6 +61,10 @@ const Register = () => {
       toast.error(err.message)
     }
   };
+
+
+
+  
 
   return (
     <div>
