@@ -2,7 +2,7 @@
     {
       "title": "Comprehensive Blood Test",
       "image": "https://i.ibb.co/6FVKVD6/coronavirus-test-assortment-lab-23-2149107257.jpg",
-      "date": "2023-11-25",
+      "bookings": 5,
       "slots": 10,
       "shortDescription": "A comprehensive analysis of your blood to check for various health indicators.",
       "price": 100
@@ -10,7 +10,7 @@
     {
       "title": "MRI Scan",
       "image": "https://i.ibb.co/QP3XBNX/doctor-getting-patient-ready-ct-scan-23-2149367454.jpg",
-      "date": "2023-12-01",
+      "bookings": 15,
       "slots": 5,
       "shortDescription": "Detailed MRI scan to diagnose and monitor various conditions.",
       "price": 500
@@ -18,7 +18,7 @@
     {
       "title": "X-Ray",
       "image": "https://i.ibb.co/fnD4gjn/portrait-woman-wearing-medical-gown-holding-x-ray-23-2149529470.jpg",
-      "date": "2023-11-30",
+      "bookings": 10,
       "slots": 8,
       "shortDescription": "Quick and painless imaging test to view the inside of your body.",
       "price": 50
@@ -26,7 +26,7 @@
     {
       "title": "Ultrasound",
       "image": "https://i.ibb.co/Jk67JtJ/gynecologist-performing-ultrasound-consultation-23-2149353023.jpg",
-      "date": "2023-12-05",
+      "bookings": 13,
       "slots": 7,
       "shortDescription": "Non-invasive test using sound waves to create images of the inside of your body.",
       "price": 200
@@ -34,7 +34,7 @@
     {
       "title": "CT Scan",
       "image": "https://i.ibb.co/GR7XdD0/full-shot-patient-getting-ct-scan-23-2149341510.jpg",
-      "date": "2023-12-10",
+      "bookings": 20,
       "slots": 4,
       "shortDescription": "Detailed imaging test that helps diagnose and monitor various conditions.",
       "price": 400
