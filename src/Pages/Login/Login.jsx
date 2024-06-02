@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import useAuth from "../Hooks/useAuth";
 import toast from "react-hot-toast";
 import { FaRegEye } from "react-icons/fa6";
@@ -15,6 +15,10 @@ const Login = () => {
   const [ShowPassword, SetShowPassword] = useState(false);
   const { signIn } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation()
+
+  const from = location.state?.from?.pathname || "/"
+
 
   const onSubmit = async (data) => {
     console.log(data);
@@ -23,7 +27,7 @@ const Login = () => {
       // user registration
       const res = await signIn(data.email, data.password);
       console.log(res);
-      navigate('/')
+      navigate(from)
       toast.success('Login Successfully')
     } catch (err) {
       console.log(err);
@@ -176,7 +180,7 @@ const Login = () => {
                     Sign in
                   </button>
                 </div>
-                <p className="my-8 text-sm text-gray-400 text-center">
+                {/* <p className="my-8 text-sm text-gray-400 text-center">
                   or continue with
                 </p>
                 <div className="space-x-8 flex justify-center">
@@ -219,7 +223,7 @@ const Login = () => {
                       />
                     </svg>
                   </button>
-                </div>
+                </div> */}
               </form>
             </div>
             <div className="md:h-full max-md:mt-10 bg-[#000842] rounded-xl lg:p-12 p-8">

@@ -9,6 +9,12 @@ import AllTests from "../Pages/AllTests/AllTests";
 import Doctors from "../Pages/Home/Doctor/Doctors";
 import Register from "../Pages/Register/Register";
 import Login from "../Pages/Login/Login";
+import Dashboard from "../Layout/Dashboard";
+import PrivateRoute from "../Provider/PrivateRoute";
+import Profile from "../Pages/Dashboard/User/Profile/Profile";
+import TestResults from "../Pages/Dashboard/User/TestResults/TestResults";
+import Bookings from "../Pages/Dashboard/User/Appointments/Bookings";
+
   
   const router = createBrowserRouter([
     {
@@ -46,6 +52,25 @@ import Login from "../Pages/Login/Login";
     {
       path: '/register',
       element: <Register/>
+    },
+    {
+      path: '/dashboard',
+      element: <PrivateRoute><Dashboard/></PrivateRoute>,
+      children: [
+        {
+          path: 'profile',
+          element: <Profile/>
+        },
+        {
+          path: 'myBookings',
+          element: <Bookings/>
+        },
+        {
+          path: 'testResults',
+          element: <TestResults/> 
+        }
+
+      ]
     }
   ]);
 

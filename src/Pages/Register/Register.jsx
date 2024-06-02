@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { districts } from "../../Components/Districts/DistrictsData";
 import { upazilas } from "../../Components/Districts/UpazilaData";
 import { useForm } from "react-hook-form";
@@ -20,6 +20,9 @@ const Register = () => {
   const { createUser, updateUserProfile } = useAuth();
   const navigate = useNavigate();
   const axiosCommon = useAxiosCommon()
+  const location = useLocation()
+
+  const from = location.state?.from?.pathname || "/"
 
   const onSubmit = async (data) => {
     console.log(data);
@@ -48,7 +51,7 @@ const Register = () => {
     axiosCommon.post('/users', userInfo)
     .then(res => {
       console.log(res.data);
-      navigate("/");
+      navigate(from);
       toast.success("Registration Successfully");
     })
     .catch((error) => {
@@ -64,7 +67,7 @@ const Register = () => {
 
 
 
-  
+
 
   return (
     <div>
