@@ -2,12 +2,13 @@ import useAuth from "../../../Hooks/useAuth";
 import image from "../../../../assets/featured-parallax.jpg";
 import { useState } from "react";
 import UpdateProfileModal from "../../../../Components/Modal/UpdateProfileModal";
+import ChangePassword from "../../../../Components/Modal/ChangePassword";
 
 const Profile = () => {
   const { user, loading } = useAuth();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isModalOpenChange, setIsModalOpenChange] = useState(false);
-  onClick={handleOpenModalChange}
+
 
   const handleOpenModal = () => {
     setIsModalOpen(true);
@@ -15,6 +16,14 @@ const Profile = () => {
 
   const handleCloseModal = () => {
     setIsModalOpen(false);
+  };
+
+  const handleOpenModalChange = () => {
+    setIsModalOpenChange(true);
+  };
+
+  const handleCloseModalChange = () => {
+    setIsModalOpenChange(false);
   };
 
   if (loading) return <div>Loading.....</div>;
@@ -67,9 +76,13 @@ const Profile = () => {
                   isModalOpen={isModalOpen}
                   handleCloseModal={handleCloseModal}
                 />
-                <button className="bg-[#F43F5E] px-7 py-1 rounded-lg text-white cursor-pointer hover:bg-[#af4053]">
+                <button onClick={handleOpenModalChange}  className="bg-[#F43F5E] px-7 py-1 rounded-lg text-white cursor-pointer hover:bg-[#af4053]">
                   Change Password
                 </button>
+                <ChangePassword
+                  isModalOpenChange={isModalOpenChange}
+                  handleCloseModalChange={handleCloseModalChange}
+                />
               </div>
             </div>
           </div>
