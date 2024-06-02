@@ -8,7 +8,7 @@ const ViewDetails = () => {
   const { id } = useParams();
   const axiosCommon = useAxiosCommon();
 
-  const { data: testDetail = {} } = useQuery({
+  const { data: testDetail = {}, refetch } = useQuery({
     queryKey: ["testDetail", id],
     queryFn: async () => {
       const { data } = await axiosCommon.get(`/testDetails/${id}`);
@@ -41,13 +41,14 @@ const ViewDetails = () => {
             <p><span className="font-bold">Price:</span> ${testDetail.price}</p>
           </div>
           <button
+          disabled={testDetail?.slots === 0}
           onClick={() => setIsOpen(!isOpen)}
               type="button"
               className=" bg-[#009bda] hover:bg-blue-800  font-medium rounded-lg text-sm px-4 py-2 text-center text-white dark:hover:bg-blue-700"
             >
               Book Now
             </button>
-            <BookingModal closeModal={closeModal} isOpen={isOpen} bookingInfo={testDetail} today={today}/>
+            <BookingModal closeModal={closeModal} isOpen={isOpen} bookingInfo={testDetail} today={today} refetch={refetch}/>
         </div>
       </div>
     </div>

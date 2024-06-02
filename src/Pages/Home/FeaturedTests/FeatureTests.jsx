@@ -1,14 +1,15 @@
 import { useQuery } from "@tanstack/react-query";
-import useAxiosCommon from "../../Hooks/useAxiosCommon";
+
 import TestCard from "./TestCard";
+import useAxiosSecure from "../../Hooks/useAxiosSecure";
 
 const FeatureTests = () => {
-  const axiosCommon = useAxiosCommon();
+const axiosSecure = useAxiosSecure()
 
-  const { data: tests = {}, isLoading } = useQuery({
+  const { data: tests = [], isLoading } = useQuery({
     queryKey: ["featured-tests"],
     queryFn: async () => {
-      const { data } = await axiosCommon.get("/featured-tests");
+      const { data } = await axiosSecure.get("/featured-tests");
       return data;
     },
   });
