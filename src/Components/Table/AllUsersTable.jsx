@@ -1,11 +1,13 @@
 import { useState } from "react";
 import SeeDetailsModal from "../Modal/SeeDetailsModal";
 import UpdateRoleModal from "../Modal/UpdateRoleModal";
+import UpdateStatusModal from "../Modal/UpdateStatusModal";
 
 const AllUsersTable = ({ users, isLoading, refetch }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedUser, setSelectedUser] = useState(null);
   const [updateUser, setUpdateUser] = useState(null);
+  const [updateStatus, setUpdateStatus] = useState(null);
 
   const openModal = (user) => {
     setSelectedUser(user);
@@ -13,13 +15,20 @@ const AllUsersTable = ({ users, isLoading, refetch }) => {
   };
 
   const updateUserModal = (user) => {
-    setUpdateUser(user)
+    setUpdateUser(user);
     setIsOpen(true);
-  }
+  };
+
+  const updateStatusModal  = (user) => {
+    setUpdateStatus(user);
+    setIsOpen(true);
+  };
 
   const closeModal = () => {
     setIsOpen(false);
     setSelectedUser(null);
+    setUpdateUser(null);
+    setUpdateStatus(null);
   };
 
   if (isLoading) return <div>Loading...</div>;
@@ -43,7 +52,7 @@ const AllUsersTable = ({ users, isLoading, refetch }) => {
               <th scope="col" className="px-6 py-3">
                 View Details
               </th>
-              <th scope="col" className="px-6 py-3">
+              <th scope="col" className="px-6 py-3 text-center">
                 Action
               </th>
             </tr>
@@ -105,12 +114,20 @@ const AllUsersTable = ({ users, isLoading, refetch }) => {
                     See More info
                   </button>
                 </td>
-                <td className="px-6 py-4">
-                  <button 
-                   type="button"
-                  onClick={() => updateUserModal(user)}
-                  className="font-medium  bg-slate-300 p-2 rounded-lg  text-blue-600  hover:underline">
+                <td className="px-6 py-4 text-center">
+                  <button
+                    type="button"
+                    onClick={() => updateUserModal(user)}
+                    className="font-medium mr-4  bg-slate-300 p-2 rounded-lg  text-blue-600  hover:underline"
+                  >
                     Update Role
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => updateStatusModal(user)}
+                    className="font-medium  bg-slate-300 p-2 rounded-lg  text-blue-600  hover:underline"
+                  >
+                    Update Status
                   </button>
                 </td>
               </tr>
@@ -125,11 +142,22 @@ const AllUsersTable = ({ users, isLoading, refetch }) => {
           seeDetailsInfo={selectedUser}
         />
       )}
-      {
-        updateUser && (
-            <UpdateRoleModal updateUser={updateUser} closeModal={closeModal} isOpen={isOpen} refetch={refetch} />
-        )
-      }
+      {updateUser && (
+        <UpdateRoleModal
+          updateUser={updateUser}
+          closeModal={closeModal}
+          isOpen={isOpen}
+          refetch={refetch}
+        />
+      )}
+      {updateStatus && (
+        <UpdateStatusModal
+        updateStatus={updateStatus}
+          closeModal={closeModal}
+          isOpen={isOpen}
+          refetch={refetch}
+        />
+      )}
     </div>
   );
 };
