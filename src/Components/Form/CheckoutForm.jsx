@@ -118,6 +118,7 @@ const CheckoutForm = ({ closeModal, bookingInfo, refetch }) => {
         amountPaid: discountedPrice, // save the discounted amount
       };
       delete paymentInfo._id;
+      delete paymentInfo.price;
       console.log(paymentInfo);
 
       try {

@@ -39,6 +39,7 @@ const ViewDetails = () => {
             <p><span className="font-bold">Date:</span> {today}</p>
             <p><span className="font-bold">Available Slots:</span> {testDetail.slots}</p>
             <p><span className="font-bold">Price:</span> ${testDetail.price}</p>
+            <p><span className="font-bold">Time:</span> {testDetail.time}PM</p>
           </div>
           <button
           disabled={testDetail?.slots === 0}

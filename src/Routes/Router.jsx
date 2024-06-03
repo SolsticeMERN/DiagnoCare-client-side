@@ -58,7 +58,7 @@ import Bookings from "../Pages/Dashboard/User/Appointments/Bookings";
       element: <PrivateRoute><Dashboard/></PrivateRoute>,
       children: [
         {
-          path: 'profile',
+          path: '/dashboard',
           element: <Profile/>
         },
         {
