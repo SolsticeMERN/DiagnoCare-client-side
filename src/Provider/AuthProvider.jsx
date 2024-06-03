@@ -46,15 +46,12 @@ const AuthProvider = ({ children }) => {
     })
   }
 
-
-
-
   // onAuthStateChange
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, currentUser => {
       setUser(currentUser)
    if(currentUser){
-    const userInfo = {email: createUser?.email}
+    const userInfo = {email: currentUser?.email}
     axiosCommon.post('/jwt', userInfo)
     .then(res => {
       if(res.data.token){
