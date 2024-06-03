@@ -1,12 +1,16 @@
 import { useState } from "react";
 import { NavLink, Outlet, useNavigate } from "react-router-dom";
 import useAuth from "../Pages/Hooks/useAuth";
+import useRole from "../Pages/Hooks/useRole";
+import AdminMenu from "../Pages/Dashboard/Admin/AdminMenu";
 
 const Dashboard = () => {
   const {logOut} = useAuth()
   const [isDrawerOpen, setIsDrawerOpen] = useState(true);
   const [isEcommerceOpen, setIsEcommerceOpen] = useState(false);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+  const [role] = useRole()
+  console.log(role);
 
   const handleLogout = () => {
     logOut()
@@ -41,7 +45,7 @@ const Dashboard = () => {
           id="drawer-navigation-label"
           className="text-base font-semibold text-gray-500 uppercase dark:text-gray-400"
         >
-          Menu
+          {role === 'admin' ? 'Admin Dashboard' : "User Dashboard"}
         </h5>
         <button
           type="button"
@@ -69,9 +73,88 @@ const Dashboard = () => {
         <div>
         <div className="py-4 overflow-y-auto">
           <ul className="space-y-2 font-medium">
-            <li>
+           {role === 'admin' ? <AdminMenu/> : <>
+           <li>
+            
+            <button
+              type="button"
+              className="flex items-center w-full p-2 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
+              aria-controls="dropdown-example"
+              onClick={() => setIsEcommerceOpen(!isEcommerceOpen)}
+            >
+              <svg
+                className="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="currentColor"
+                viewBox="0 0 18 21"
+              >
+                <path d="M15 12a1 1 0 0 0 .962-.726l2-7A1 1 0 0 0 17 3H3.77L3.175.745A1 1 0 0 0 2.208 0H1a1 1 0 0 0 0 2h.438l.6 2.255v.019l2 7 .746 2.986A3 3 0 1 0 9 17a2.966 2.966 0 0 0-.184-1h2.368c-.118.32-.18.659-.184 1a3 3 0 1 0 3-3H6.78l-.5-2H15Z" />
+              </svg>
+              <span className="flex-1 ms-3 text-left rtl:text-right whitespace-nowrap">
+              Appointments
+              </span>
+              <svg
+                className={`w-3 h-3 transition-transform ${
+                  isEcommerceOpen ? "rotate-180" : ""
+                }`}
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 10 6"
+              >
+                <path
+                  stroke="currentColor"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="m1 1 4 4 4-4"
+                />
+              </svg>
+            </button>
+
+            <ul
+              id="dropdown-example"
+              className={`py-2 space-y-2 ${isEcommerceOpen ? "" : "hidden"}`}
+            >
+              <li>
+                <NavLink
+                   to='/dashboard/myBookings'
+                  className="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
+                >
+                  My Booking
+                </NavLink>
+              </li>
+            </ul>
+          </li>
+          <li>
+            <NavLink
+              to='/dashboard/testResults'
+              className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
+            >
+              <svg
+                className="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="currentColor"
+                viewBox="0 0 20 20"
+              >
+                <path d="M8.003 16a1 1 0 0 1-.894-.553L5.618 12H3a1 1 0 0 1 0-2h3a1 1 0 0 1 .894.553L8.382 13H11.618l.888-2H8a1 1 0 0 1 0-2h4.003a1 1 0 0 1 .894 1.447L12.382 11h2.236l.888-2H14a1 1 0 0 1 0-2h2.003a1 1 0 0 1 .894 1.447L16.382 9h1.236a1 1 0 1 1 0 2h-2.618a1 1 0 0 1-.894-.553L12.382 13H9.618l-.888 2H13a1 1 0 0 1 0 2H9a1 1 0 0 1-.894-1.447L9.618 15H6.382l-.888 2H3a1 1 0 0 1 0-2h2.618l1.49-3.105A1 1 0 0 1 8.003 16Zm4-10a1 1 0 0 1-1-1V1a1 1 0 1 1 2 0v4a1 1 0 0 1-1 1Z" />
+              </svg>
+              <span className="ms-3">Test Results</span>
+            </NavLink>
+          </li>
+           </>}
+          </ul>
+        </div>
+
+        <hr  />
+        {/* user info */}
+        <div className="py-4 overflow-y-auto">
+          <ul className="space-y-2 font-medium">
+          <li>
               <NavLink 
-                to='/dashboard/profile'
+                to='/dashboard'
                 className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
               >
                 <svg
@@ -87,83 +170,6 @@ const Dashboard = () => {
                 <span className="ms-3">My Profile</span>
               </NavLink>
             </li>
-            <li>
-            
-              <button
-                type="button"
-                className="flex items-center w-full p-2 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
-                aria-controls="dropdown-example"
-                onClick={() => setIsEcommerceOpen(!isEcommerceOpen)}
-              >
-                <svg
-                  className="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white"
-                  aria-hidden="true"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="currentColor"
-                  viewBox="0 0 18 21"
-                >
-                  <path d="M15 12a1 1 0 0 0 .962-.726l2-7A1 1 0 0 0 17 3H3.77L3.175.745A1 1 0 0 0 2.208 0H1a1 1 0 0 0 0 2h.438l.6 2.255v.019l2 7 .746 2.986A3 3 0 1 0 9 17a2.966 2.966 0 0 0-.184-1h2.368c-.118.32-.18.659-.184 1a3 3 0 1 0 3-3H6.78l-.5-2H15Z" />
-                </svg>
-                <span className="flex-1 ms-3 text-left rtl:text-right whitespace-nowrap">
-                Appointments
-                </span>
-                <svg
-                  className={`w-3 h-3 transition-transform ${
-                    isEcommerceOpen ? "rotate-180" : ""
-                  }`}
-                  aria-hidden="true"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 10 6"
-                >
-                  <path
-                    stroke="currentColor"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="m1 1 4 4 4-4"
-                  />
-                </svg>
-              </button>
-
-              <ul
-                id="dropdown-example"
-                className={`py-2 space-y-2 ${isEcommerceOpen ? "" : "hidden"}`}
-              >
-                <li>
-                  <NavLink
-                     to='/dashboard/myBookings'
-                    className="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
-                  >
-                    My Booking
-                  </NavLink>
-                </li>
-              </ul>
-            </li>
-            <li>
-              <NavLink
-                to='/dashboard/testResults'
-                className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
-              >
-                <svg
-                  className="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
-                  aria-hidden="true"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                >
-                  <path d="M8.003 16a1 1 0 0 1-.894-.553L5.618 12H3a1 1 0 0 1 0-2h3a1 1 0 0 1 .894.553L8.382 13H11.618l.888-2H8a1 1 0 0 1 0-2h4.003a1 1 0 0 1 .894 1.447L12.382 11h2.236l.888-2H14a1 1 0 0 1 0-2h2.003a1 1 0 0 1 .894 1.447L16.382 9h1.236a1 1 0 1 1 0 2h-2.618a1 1 0 0 1-.894-.553L12.382 13H9.618l-.888 2H13a1 1 0 0 1 0 2H9a1 1 0 0 1-.894-1.447L9.618 15H6.382l-.888 2H3a1 1 0 0 1 0-2h2.618l1.49-3.105A1 1 0 0 1 8.003 16Zm4-10a1 1 0 0 1-1-1V1a1 1 0 1 1 2 0v4a1 1 0 0 1-1 1Z" />
-                </svg>
-                <span className="ms-3">Test Results</span>
-              </NavLink>
-            </li>
-          </ul>
-        </div>
-
-        <hr  />
-        {/* user info */}
-        <div className="py-4 overflow-y-auto">
-          <ul className="space-y-2 font-medium">
             <li>
               <NavLink 
                 to='/'

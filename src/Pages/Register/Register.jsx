@@ -46,6 +46,7 @@ const Register = () => {
     blood: data.blood,
     district: data.district,
     upazila: data.upazila,
+    role: "user"
    }
 
     axiosCommon.post('/users', userInfo)

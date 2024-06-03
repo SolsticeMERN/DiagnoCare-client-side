@@ -3,11 +3,13 @@ import image from "../../../../assets/featured-parallax.jpg";
 import { useState } from "react";
 import UpdateProfileModal from "../../../../Components/Modal/UpdateProfileModal";
 import ChangePassword from "../../../../Components/Modal/ChangePassword";
+import useRole from "../../../Hooks/useRole";
 
 const Profile = () => {
   const { user, loading } = useAuth();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isModalOpenChange, setIsModalOpenChange] = useState(false);
+  const [role] = useRole()
 
 
   const handleOpenModal = () => {
@@ -45,8 +47,8 @@ const Profile = () => {
             />
           </a>
 
-          <p className="p-2 uppercase px-4 text-xs text-white bg-pink-500 rounded-full">
-            ADmin
+          <p className="p-2  px-4 text-xs text-white bg-pink-500 rounded-full">
+            {role === "admin" ? "Admin" : "User"}
           </p>
           <div className="mt-2 text-xl flex flex-col items-center font-medium text-gray-800 ">
             User Id:
