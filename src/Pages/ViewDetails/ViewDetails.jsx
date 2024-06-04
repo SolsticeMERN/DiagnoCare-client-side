@@ -3,10 +3,14 @@ import useAxiosCommon from "../Hooks/useAxiosCommon";
 import { useQuery } from "@tanstack/react-query";
 import BookingModal from "../../Components/Modal/BookingModal";
 import { useState } from "react";
+import useStatus from "../Hooks/useStatus";
 
 const ViewDetails = () => {
   const { id } = useParams();
   const axiosCommon = useAxiosCommon();
+  const [status] = useStatus()
+
+  console.log(status);
 
   const { data: testDetail = {}, refetch } = useQuery({
     queryKey: ["testDetail", id],
@@ -61,7 +65,7 @@ const ViewDetails = () => {
             disabled={testDetail?.slots === 0}
             onClick={() => setIsOpen(!isOpen)}
             type="button"
-            className=" bg-[#009bda] hover:bg-blue-800  font-medium rounded-lg text-sm px-4 py-2 text-center text-white dark:hover:bg-blue-700"
+            className={` bg-[#009bda] ${status === "blocked" && "hidden"} hover:bg-blue-800  font-medium rounded-lg text-sm px-4 py-2 text-center text-white dark:hover:bg-blue-700`}
           >
             Book Now
           </button>

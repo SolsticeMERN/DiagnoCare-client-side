@@ -171,11 +171,11 @@ const AllUsersTable = ({ users, isLoading, refetch }) => {
                     Download Details
                   </button>
                 </td>
-                <td className="px-6 py-4 text-center">
+                <td className="px-6 py-4  text-center">
                   <button
                     type="button"
                     onClick={() => updateUserModal(user)}
-                    className="font-medium mr-4  bg-slate-300 p-2 rounded-lg  text-blue-600  hover:underline"
+                    className="font-medium mr-4 mb-4 bg-slate-300 p-2 rounded-lg  text-blue-600  hover:underline"
                   >
                     Update Role
                   </button>

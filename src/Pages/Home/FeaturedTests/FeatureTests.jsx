@@ -14,7 +14,6 @@ const axiosSecure = useAxiosSecure()
     },
   });
 
-  console.log(tests);
   if (isLoading) {
     return <div>Loading...</div>;
   }

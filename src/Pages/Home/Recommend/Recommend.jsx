@@ -35,8 +35,6 @@ const Recommend = () => {
     return <div>No banners available</div>;
   }
 
-  console.log(recommends);
-
   return (
     <div className="max-w-screen-xl mx-auto p-4 my-20">
       <Swiper

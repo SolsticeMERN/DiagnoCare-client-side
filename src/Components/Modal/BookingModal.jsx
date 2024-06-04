@@ -16,7 +16,6 @@ import useAuth from "../../Pages/Hooks/useAuth";
 const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLIC_KEY);
 
 const BookingModal = ({ closeModal, isOpen, testDetail, today, refetch }) => {
-  console.log(testDetail);
   const {user} = useAuth()
 
   return (

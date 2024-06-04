@@ -2,12 +2,14 @@ import { useState } from "react";
 import icon from "../assets/Icon.png";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import useAuth from "../Pages/Hooks/useAuth";
+import useStatus from "../Pages/Hooks/useStatus";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isUserOpen, setIsUserOpen] = useState(false);
   const { user, logOut } = useAuth();
   const navigate = useNavigate()
+  const [status] = useStatus()
 
   const handleSignOut = () => {
     logOut()
@@ -161,7 +163,7 @@ const Navbar = () => {
                   About Us
                 </NavLink>
               </li>
-              {user ? (
+              {user && status === 'active' ? (
                 <li>
                   <NavLink
                     to="/dashboard"
