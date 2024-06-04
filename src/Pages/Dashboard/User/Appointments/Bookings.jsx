@@ -2,14 +2,16 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import { MdDeleteForever } from "react-icons/md";
 import toast from "react-hot-toast";
+import useAuth from "../../../Hooks/useAuth";
 
 const Bookings = () => {
   const axiosSecure = useAxiosSecure();
+  const {user} = useAuth()
 
   const { data: bookings = [], refetch } = useQuery({
     queryKey: ["booking"],
     queryFn: async () => {
-      const { data } = await axiosSecure.get("/booking");
+      const { data } = await axiosSecure.get(`/booking/${user?.email}`);
       return data;
     },
   });

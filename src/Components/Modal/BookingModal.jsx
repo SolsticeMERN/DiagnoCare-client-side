@@ -10,12 +10,14 @@ import { Fragment } from "react";
 import {loadStripe} from '@stripe/stripe-js';
 import { Elements } from "@stripe/react-stripe-js";
 import CheckoutForm from "../Form/CheckoutForm";
+import useAuth from "../../Pages/Hooks/useAuth";
 
 // / recreating the `Stripe` object on every render.
 const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLIC_KEY);
 
-const BookingModal = ({ closeModal, isOpen, bookingInfo, today, refetch }) => {
-  console.log(bookingInfo);
+const BookingModal = ({ closeModal, isOpen, testDetail, today, refetch }) => {
+  console.log(testDetail);
+  const {user} = useAuth()
 
   return (
     <Transition appear show={isOpen} as={Fragment}>
@@ -52,30 +54,33 @@ const BookingModal = ({ closeModal, isOpen, bookingInfo, today, refetch }) => {
                 </DialogTitle>
                 <div className="mt-2">
                   <p className="text-sm text-gray-500">
-                    Test Name: {bookingInfo.title}
+                    Test Name: {testDetail.title}
                   </p>
                 </div>
                 <div className="mt-2">
-                  <p className="text-sm text-gray-500">username: Shakil</p>
+                  <p className="text-sm text-gray-500">userName: {user?.displayName}</p>
+                </div>
+                <div className="mt-2">
+                  <p className="text-sm text-gray-500">userEmail: {user?.email}</p>
                 </div>
                 <div className="mt-2">
                   <p className="text-sm text-gray-500">Date: {today}</p>
                 </div>
                 <div className="mt-2">
                   <p className="text-sm text-gray-500">
-                    Slots: {bookingInfo.slots}
+                    Slots: {testDetail.slots}
                   </p>
                 </div>
                 <div className="mt-2">
                   <p className="text-sm text-gray-500">
-                    Price: $ {bookingInfo.price}
+                    Price: $ {testDetail.price}
                   </p>
                 </div>
           
                 <hr className="mt-8 " />
                 {/* checkout form */}
                 <Elements stripe={stripePromise}>
-                  <CheckoutForm refetch={refetch}  closeModal={closeModal} bookingInfo={bookingInfo} />
+                  <CheckoutForm refetch={refetch}  closeModal={closeModal} testDetail={testDetail} />
                 </Elements>
               </DialogPanel>
             </TransitionChild>

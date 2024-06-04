@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import AllUsersTable from "../../../../Components/Table/AllUsersTable";
 
+
 const AllUsers = () => {
 
  const axiosSecure = useAxiosSecure()
@@ -16,9 +17,13 @@ const AllUsers = () => {
  })
 
 
+
+
+
+
     return (
         <div>
-            <AllUsersTable users={users} isLoading={isLoading} refetch={refetch}/>
+            <AllUsersTable users={users} isLoading={isLoading} refetch={refetch} />
         </div>
     );
 };

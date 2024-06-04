@@ -2,12 +2,22 @@ import { useState } from "react";
 import SeeDetailsModal from "../Modal/SeeDetailsModal";
 import UpdateRoleModal from "../Modal/UpdateRoleModal";
 import UpdateStatusModal from "../Modal/UpdateStatusModal";
+import { jsPDF } from "jspdf";
+import "jspdf-autotable";
+import useAxiosSecure from "../../Pages/Hooks/useAxiosSecure";
+
+
+
 
 const AllUsersTable = ({ users, isLoading, refetch }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedUser, setSelectedUser] = useState(null);
   const [updateUser, setUpdateUser] = useState(null);
   const [updateStatus, setUpdateStatus] = useState(null);
+  const axiosSecure = useAxiosSecure();
+  
+
+  
 
   const openModal = (user) => {
     setSelectedUser(user);
@@ -31,6 +41,47 @@ const AllUsersTable = ({ users, isLoading, refetch }) => {
     setUpdateStatus(null);
   };
 
+  const generatePDF = async (user) => {
+    const doc = new jsPDF();
+  
+    // Fetch the bookings for the user
+    const { data: bookings } = await axiosSecure.get(`/booking/${user.email}`);
+  
+    // User details
+    doc.text(`User Details`, 14, 20);
+    doc.text(`Name: ${user.name}`, 14, 30);
+    doc.text(`Email: ${user.email}`, 14, 40);
+    doc.text(`Role: ${user.role}`, 14, 50);
+    doc.text(`Status: ${user.status === 'active' ? 'Online' : 'Blocked'}`, 14, 60);
+  
+    // Test details
+    if (bookings && bookings.length > 0) {
+      doc.text(`Tests Booked`, 14, 80);
+      const testRows = bookings.map((booking, index) => [
+        index + 1,
+        booking.title,
+        new Date(booking.date).toLocaleDateString("en-US", {
+          year: "numeric",
+          month: "long",
+          day: "numeric",
+        }),
+        booking.time,
+        booking.reportStatus,
+      ]);
+  
+      doc.autoTable({
+        head: [['#', 'Test Name', 'Date', 'Time', 'Status']],
+        body: testRows,
+        startY: 90,
+      });
+    } else {
+      doc.text(`No tests booked`, 14, 80);
+    }
+  
+    // Save the PDF
+    doc.save(`${user.name}_details.pdf`);
+  };
+
   if (isLoading) return <div>Loading...</div>;
 
   return (
@@ -52,6 +103,7 @@ const AllUsersTable = ({ users, isLoading, refetch }) => {
               <th scope="col" className="px-6 py-3">
                 View Details
               </th>
+              <th scope="col" className="px-6 py-3">Download Details</th>
               <th scope="col" className="px-6 py-3 text-center">
                 Action
               </th>
@@ -112,6 +164,11 @@ const AllUsersTable = ({ users, isLoading, refetch }) => {
                     className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
                   >
                     See More info
+                  </button>
+                </td>
+                <td className="px-6 py-4">
+                  <button onClick={() => generatePDF(user)} className="font-medium text-blue-600 dark:text-blue-500 hover:underline">
+                    Download Details
                   </button>
                 </td>
                 <td className="px-6 py-4 text-center">

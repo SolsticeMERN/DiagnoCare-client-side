@@ -5,7 +5,7 @@ import useAxiosSecure from "../../Pages/Hooks/useAxiosSecure";
 import { ImSpinner9 } from "react-icons/im";
 import useAuth from "../../Pages/Hooks/useAuth";
 
-const CheckoutForm = ({ closeModal, bookingInfo, refetch }) => {
+const CheckoutForm = ({ closeModal, testDetail, refetch }) => {
   const stripe = useStripe();
   const {user} = useAuth()
   const elements = useElements();
@@ -13,11 +13,11 @@ const CheckoutForm = ({ closeModal, bookingInfo, refetch }) => {
   const [clientSecret, setClientSecret] = useState("");
   const [processing, setProcessing] = useState(false);
   const [promoCode, setPromoCode] = useState("");
-  const [discountedPrice, setDiscountedPrice] = useState(bookingInfo?.price);
+  const [discountedPrice, setDiscountedPrice] = useState(testDetail?.price);
   const axiosSecure = useAxiosSecure();
 
   useEffect(() => {
-    if (bookingInfo?.price && bookingInfo?.price > 1) {
+    if (testDetail?.price && testDetail?.price > 1) {
       getClientSecret({ price: discountedPrice });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -32,9 +32,9 @@ const CheckoutForm = ({ closeModal, bookingInfo, refetch }) => {
   const applyPromoCode = () => {
     // Check if promo code is valid and apply discount
     if (promoCode === "SUMMER2024") {
-      setDiscountedPrice(bookingInfo?.price * (1 - 0.15)); // 15% discount
+      setDiscountedPrice(testDetail?.price * (1 - 0.15)); // 15% discount
     } else if (promoCode === "HEALTH2024") {
-      setDiscountedPrice(bookingInfo?.price * (1 - 0.1)); // 10% discount
+      setDiscountedPrice(testDetail?.price * (1 - 0.1)); // 10% discount
     } else {
       // Handle invalid promo code
       setCardError("Invalid promo code");
@@ -110,11 +110,12 @@ const CheckoutForm = ({ closeModal, bookingInfo, refetch }) => {
     if (paymentIntent.status === "succeeded") {
       // create payment object
       const paymentInfo = {
-        ...bookingInfo,
-        bookingId: bookingInfo?._id,
+        ...testDetail,
+        bookingId: testDetail?._id,
         transactionId: paymentIntent.id,
         date: new Date(),
         reportStatus: "pending",
+        email: user?.email,
         amountPaid: discountedPrice, // save the discounted amount
       };
       delete paymentInfo._id;
@@ -127,9 +128,9 @@ const CheckoutForm = ({ closeModal, bookingInfo, refetch }) => {
 
         // Decrement slots
         const updateResponse = await axiosSecure.patch(
-          `/update-slots/${bookingInfo._id}`,
+          `/update-slots/${testDetail._id}`,
           {
-            slots: bookingInfo.slots - 1,
+            slots: testDetail.slots - 1,
           }
         );
 

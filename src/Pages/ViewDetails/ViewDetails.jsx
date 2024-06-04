@@ -68,7 +68,7 @@ const ViewDetails = () => {
           <BookingModal
             closeModal={closeModal}
             isOpen={isOpen}
-            bookingInfo={testDetail}
+            testDetail={testDetail}
             today={today}
             refetch={refetch}
           />
