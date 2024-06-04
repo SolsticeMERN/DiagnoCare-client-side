@@ -19,6 +19,7 @@ import AllBanners from "../Pages/Dashboard/Admin/Menu/AllBanners";
 import Statistics from "../Pages/Dashboard/Admin/Menu/Statistics";
 import AdminRoute from "./AdminRoute";
 import Reservation from "../Pages/Dashboard/Admin/Menu/Reservation";
+import ViewAllTests from "../Pages/Dashboard/Admin/Menu/ViewAllTests";
 
 const router = createBrowserRouter([
   {
@@ -101,12 +102,12 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "allTests",
+        path: "all-Tests",
         element: (
           <PrivateRoute>
             <AdminRoute>
               {" "}
-              <AllTests />
+              < ViewAllTests/>
             </AdminRoute>
           </PrivateRoute>
         ),

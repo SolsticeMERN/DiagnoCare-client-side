@@ -58,7 +58,7 @@ const ViewDetails = () => {
               <span className="font-bold">Price:</span> ${testDetail.price}
             </p>
             <p>
-              <span className="font-bold">Time:</span> {testDetail.time}PM
+              <span className="font-bold">Time:</span> {testDetail.time}
             </p>
           </div>
           <button
