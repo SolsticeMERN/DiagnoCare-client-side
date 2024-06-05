@@ -3,13 +3,20 @@ import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import toast from "react-hot-toast";
 import { useState } from "react";
 import UpdateTestModal from "../../../../Components/Modal/UpdateTestModal";
+import ViewReservationRoute from "../../../../Components/Modal/ViewReservationRoute";
 
 const ViewAllTests = () => {
   const axiosSecure = useAxiosSecure();
   const [isOpen, setIsOpen] = useState(false);
   const [selectedTest, setSelectedTest] = useState(null);
+  const [isOpenReservationModal, setIsOpenReservationModal] = useState(false);
+  const [selectedReservation, setSelectedReservation] = useState(null);
 
-  const { data: allTests, isLoading, refetch } = useQuery({
+  const {
+    data: allTests,
+    isLoading,
+    refetch,
+  } = useQuery({
     queryKey: ["tests"],
     queryFn: async () => {
       const { data } = await axiosSecure.get("/tests");
@@ -30,6 +37,23 @@ const ViewAllTests = () => {
   const openUpdateModal = (test) => {
     setSelectedTest(test);
     setIsOpen(true);
+  };
+
+  const ViewReservation = async (bookingId) => {
+    try {
+      const { data } = await axiosSecure.get(`/bookings/test/${bookingId}`);
+      setSelectedReservation(data);
+      setIsOpenReservationModal(true);
+
+      console.log("Selected Bookings:", data);
+    } catch (error) {
+      console.error("Error fetching bookings:", error);
+    }
+  };
+
+  const closeReservationModal = () => {
+    setIsOpenReservationModal(false);
+    selectedReservation([]);
   };
 
   return (
@@ -60,6 +84,9 @@ const ViewAllTests = () => {
               <th scope="col" className="px-6 py-3 text-center">
                 Action
               </th>
+              <th scope="col" className="px-6 py-3 text-center">
+                Reservation
+              </th>
             </tr>
           </thead>
           <tbody>
@@ -82,10 +109,10 @@ const ViewAllTests = () => {
                 </td>
                 <th
                   scope="row"
-                  className="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white"
+                  className="px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white"
                 >
                   <img
-                    className="w-10 h-10 rounded-full"
+                    className="w-40 h-20 rounded-lg"
                     src={test?.image}
                     alt={`${test?.name} image`}
                   />
@@ -128,6 +155,15 @@ const ViewAllTests = () => {
                     Update Test
                   </button>
                 </td>
+                <td className="px-6 py-4 text-center">
+                  <button
+                    onClick={() => ViewReservation(test._id)}
+                    type="button"
+                    className="font-medium mr-4 mb-4 bg-slate-300 p-2 rounded-lg text-blue-600 hover:underline"
+                  >
+                    View Reservation Tests
+                  </button>
+                </td>
               </tr>
             ))}
           </tbody>
@@ -135,10 +171,17 @@ const ViewAllTests = () => {
       </div>
       {selectedTest && (
         <UpdateTestModal
-        refetch={refetch}
+          refetch={refetch}
           isOpen={isOpen}
           setIsOpen={setIsOpen}
           test={selectedTest}
+        />
+      )}
+      {selectedReservation && (
+        <ViewReservationRoute
+          isOpen={isOpenReservationModal}
+          onClose={closeReservationModal}
+          bookings={selectedReservation}
         />
       )}
     </div>
