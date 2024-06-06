@@ -88,7 +88,7 @@ const AllBannerTable = ({ banners, isLoading, refetch }) => {
                   />
                 </th>
                 <td className="px-6 py-4">{banner?.title}</td>
-                <td className="px-6 py-4">{banner?.text}</td>
+                <td className="px-6 py-4">{banner?.description}</td>
                 <td className="px-6 py-4">{banner?.buttonText}</td>
                 <td className="px-6 py-4">{banner?.couponCode}</td>
                 <td className="px-6 py-4 text-center">{banner?.discountRate}</td>
