@@ -1,13 +1,13 @@
 import { useParams } from "react-router-dom";
-import useAxiosCommon from "../Hooks/useAxiosCommon";
 import { useQuery } from "@tanstack/react-query";
 import BookingModal from "../../Components/Modal/BookingModal";
 import { useState } from "react";
 import useStatus from "../Hooks/useStatus";
+import useAxiosSecure from "../Hooks/useAxiosSecure";
 
 const ViewDetails = () => {
   const { id } = useParams();
-  const axiosCommon = useAxiosCommon();
+  const axiosSecure = useAxiosSecure()
   const [status] = useStatus()
 
   console.log(status);
@@ -15,7 +15,7 @@ const ViewDetails = () => {
   const { data: testDetail = {}, refetch } = useQuery({
     queryKey: ["testDetail", id],
     queryFn: async () => {
-      const { data } = await axiosCommon.get(`/testDetails/${id}`);
+      const { data } = await axiosSecure.get(`/testDetails/${id}`);
       return data;
     },
   });
