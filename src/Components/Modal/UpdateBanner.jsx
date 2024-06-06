@@ -12,29 +12,29 @@ import useAxiosSecure from "../../Pages/Hooks/useAxiosSecure";
 import toast from "react-hot-toast";
 
 
-const UpdateBanner = ({ closeModal, isOpen, updateUser, refetch }) => {
+const UpdateBanner = ({ closeModal, isOpen, updateBanner, refetch }) => {
   const axiosSecure = useAxiosSecure();
  
 
   const { register, handleSubmit } = useForm();
 
   const onSubmit = async (data) => {
-    const status = { role: data.role };
+    const status = { isActive: data.status };
     try {
-      const res = await axiosSecure.patch(`/roleUpdate/${updateUser._id}`, status, {
+      const res = await axiosSecure.patch(`/bannerUpdate/${updateBanner._id}`, status, {
         headers: {
           'Content-Type': 'application/json'
         }
       });
       if (res.data.modifiedCount > 0) {
-        toast.success('User role updated successfully');
+        toast.success('Banner Status updated successfully');
         refetch();
         closeModal();
         
       }
     } catch (err) {
-      console.error('Error updating role:', err); 
-      toast.error('Failed to update role');
+      console.error('Error updating Status:', err); 
+      toast.error('Failed to update Status');
     }
   };
 
@@ -69,24 +69,24 @@ const UpdateBanner = ({ closeModal, isOpen, updateUser, refetch }) => {
                   as="h3"
                   className="text-lg font-medium text-center leading-6 text-gray-900"
                 >
-                  Update Role
+                  Update Status
                 </DialogTitle>
                 <form onSubmit={handleSubmit(onSubmit)} className="mt-2">
                   <select
-                    id="role"
-                    {...register("role")}
+                    id="status"
+                    {...register("status")}
                     className="bg-white border border-gray-300 w-full text-sm px-4 py-2.5 rounded-md outline-red-500"
                     defaultValue=""
                   >
-                    <option value="admin">Admin</option>
-                    <option value="user">User</option>
+                    <option value="true">True</option>
+                    <option value="false">False</option>
                   </select>
                   <div className="flex mt-2 justify-around">
                     <button
                       type="submit"
                       className="inline-flex justify-center rounded-md border border-transparent bg-green-100 px-4 py-2 text-sm font-medium text-green-900 hover:bg-green-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-green-500 focus-visible:ring-offset-2"
                     >
-                      Update Role
+                      Update Status
                     </button>
                     <button
                       onClick={closeModal}

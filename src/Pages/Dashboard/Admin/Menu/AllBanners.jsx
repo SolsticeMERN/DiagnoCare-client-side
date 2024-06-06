@@ -17,7 +17,7 @@ const AllBanners = () => {
  console.log(banners);
     return (
         <div>
-           <AllBannerTable users={banners} isLoading={isLoading} refetch={refetch}/>
+           <AllBannerTable banners={banners} isLoading={isLoading} refetch={refetch}/>
         </div>
     );
 };

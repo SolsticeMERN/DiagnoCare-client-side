@@ -4,15 +4,15 @@ import UpdateBanner from "../Modal/UpdateBanner";
 
 
 
-const AllBannerTable = ({ users, isLoading, refetch }) => {
+const AllBannerTable = ({ banners, isLoading, refetch }) => {
   const [isOpen, setIsOpen] = useState(false);
   
-  const [updateUser, setUpdateUser] = useState(null);
+  const [updateBanner, setUpdateBanner] = useState(null);
 
 
 
-  const updateUserModal = (user) => {
-    setUpdateUser(user);
+  const updateBannerModal = (banner) => {
+    setUpdateBanner(banner);
     setIsOpen(true);
   };
 
@@ -20,7 +20,7 @@ const AllBannerTable = ({ users, isLoading, refetch }) => {
   const closeModal = () => {
     setIsOpen(false);
     
-    setUpdateUser(null);
+    setUpdateBanner(null);
     
   };
 
@@ -57,9 +57,9 @@ const AllBannerTable = ({ users, isLoading, refetch }) => {
             </tr>
           </thead>
           <tbody>
-            {users.map((user) => (
+            {banners.map((banner) => (
               <tr
-                key={user._id}
+                key={banner._id}
                 className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
               >
                 <td className="w-4 p-4">
@@ -83,30 +83,30 @@ const AllBannerTable = ({ users, isLoading, refetch }) => {
                 >
                   <img
                     className="w-40 h-20 rounded-lg "
-                    src={user?.image}
-                    alt={`${user?.name} image`}
+                    src={banner?.image}
+                    alt={`${banner?.name} image`}
                   />
                 </th>
-                <td className="px-6 py-4">{user?.title}</td>
-                <td className="px-6 py-4">{user?.text}</td>
-                <td className="px-6 py-4">{user?.buttonText}</td>
-                <td className="px-6 py-4">{user?.couponCode}</td>
-                <td className="px-6 py-4 text-center">{user?.discountRate}</td>
+                <td className="px-6 py-4">{banner?.title}</td>
+                <td className="px-6 py-4">{banner?.text}</td>
+                <td className="px-6 py-4">{banner?.buttonText}</td>
+                <td className="px-6 py-4">{banner?.couponCode}</td>
+                <td className="px-6 py-4 text-center">{banner?.discountRate}</td>
                 <td className="px-6 py-4">
                   <div className="flex items-center">
                     <div
                       className={`h-2.5 w-2.5 rounded-full ${
-                        (user?.isActive === "true" && "bg-green-500") ||
-                        (user?.isActive === "false" && "bg-red-500")
+                        (banner?.isActive === "true" && "bg-green-500") ||
+                        (banner?.isActive === "false" && "bg-red-500")
                       } me-2`}
                     ></div>
-                    {user?.isActive === "true" ? "true" : "false"}
+                    {banner?.isActive === "true" ? "true" : "false"}
                   </div>
                 </td>
                 <td className="px-6 py-4  text-center">
                   <button
                     type="button"
-                    onClick={() => updateUserModal(user)}
+                    onClick={() => updateBannerModal(banner)}
                     className="font-medium mr-4 mb-4 bg-slate-300 p-2 rounded-lg  text-blue-600  hover:underline"
                   >
                     Update Status
@@ -117,9 +117,9 @@ const AllBannerTable = ({ users, isLoading, refetch }) => {
           </tbody>
         </table>
       </div>
-      {updateUser && (
+      {updateBanner && (
         <UpdateBanner
-          updateUser={updateUser}
+        updateBanner={updateBanner}
           closeModal={closeModal}
           isOpen={isOpen}
           refetch={refetch}
