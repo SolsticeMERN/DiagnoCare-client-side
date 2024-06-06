@@ -18,7 +18,7 @@ const Bookings = () => {
 
   const {mutateAsync} = useMutation({
     mutationFn: async (_id) => {
-      const {data} = await axiosSecure.delete(`/booking-room/${_id}`)
+      const {data} = await axiosSecure.delete(`/booking-test/${_id}`)
       return data
     },
     onSuccess: async (data) => {
