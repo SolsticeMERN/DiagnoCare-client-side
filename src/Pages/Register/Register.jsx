@@ -9,6 +9,7 @@ import useAuth from "../Hooks/useAuth";
 import { imageUpload } from "../../Components/ImageApi";
 import toast from "react-hot-toast";
 import useAxiosCommon from "../Hooks/useAxiosCommon";
+import { ImSpinner9 } from "react-icons/im";
 
 const Register = () => {
   const {
@@ -18,14 +19,16 @@ const Register = () => {
   } = useForm();
   const [ShowPassword, SetShowPassword] = useState(false);
   const { createUser, updateUserProfile } = useAuth();
+  const [processing, setProcessing] = useState(false);
   const navigate = useNavigate();
-  const axiosCommon = useAxiosCommon()
-  const location = useLocation()
+  const axiosCommon = useAxiosCommon();
+  const location = useLocation();
 
-  const from = location.state?.from?.pathname || "/"
+  const from = location.state?.from?.pathname || "/";
 
   const onSubmit = async (data) => {
     console.log(data);
+    setProcessing(true);
 
     try {
       // Upload image and get image URL
@@ -36,39 +39,35 @@ const Register = () => {
       console.log(res);
 
       // update profile with username and image in firebase
-  await updateUserProfile(data.name, image_url);
+      await updateUserProfile(data.name, image_url);
 
-   const userInfo = {
-    name: data.name,
-    email: data.email,
-    status: "active",
-    image: image_url,
-    blood: data.blood,
-    district: data.district,
-    upazila: data.upazila,
-    role: "user"
-   }
+      const userInfo = {
+        name: data.name,
+        email: data.email,
+        status: "active",
+        image: image_url,
+        blood: data.blood,
+        district: data.district,
+        upazila: data.upazila,
+        role: "user",
+      };
 
-    axiosCommon.post('/users', userInfo)
-    .then(res => {
-      console.log(res.data);
-      navigate(from);
-      toast.success("Registration Successfully");
-    })
-    .catch((error) => {
-      console.error('Error updating profile:', error);
-    });
-     
-
+      axiosCommon
+        .post("/users", userInfo)
+        .then((res) => {
+          console.log(res.data);
+          navigate(from);
+          toast.success("Registration Successfully");
+        })
+        .catch((error) => {
+          console.error("Error updating profile:", error);
+        });
     } catch (err) {
       console.log(err);
-      toast.error(err.message)
+      toast.error(err.message);
+      setProcessing(false);
     }
   };
-
-
-
-
 
   return (
     <div>
@@ -352,7 +351,11 @@ const Register = () => {
                   type="submit"
                   className="hover:bg-indigo-700 focus:bg-indigo-700 text-center bg-indigo-600 text-white w-full py-2.5 rounded-md transition duration-100"
                 >
-                  Register Now
+                  {processing ? (
+                    <ImSpinner9 className="animate-spin m-auto" size={24} />
+                  ) : (
+                    "Register Now"
+                  )}
                 </button>
                 <p className="text-sm text-gray-500 mt-3">
                   Already have an account?

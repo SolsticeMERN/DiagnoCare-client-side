@@ -2,21 +2,30 @@ import { useQuery } from "@tanstack/react-query";
 
 import useAxiosCommon from "../Hooks/useAxiosCommon";
 import TestCard from "../Home/FeaturedTests/TestCard";
+import LoadingSpinner from "../../Shared/LoadingSpinner";
+import { useState } from "react";
 
 const AllTests = () => {
     const axiosCommon = useAxiosCommon();
+    const [page, setPage] = useState(1)
+    const limit = 3
 
-  const { data: tests = {}, isLoading } = useQuery({
-    queryKey: ["tests"],
+  const { data, isLoading } = useQuery({
+    queryKey: ["tests", page],
     queryFn: async () => {
-      const { data } = await axiosCommon.get("/tests");
+      const { data } = await axiosCommon.get(`/tests?page=${page}&limit=${limit}`);
       return data;
     },
   });
 
-  console.log(tests);
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <LoadingSpinner/>;
+  }
+
+  const {data: tests, pagination} = data;
+
+  const handlePageChange = (newPage) => {
+    setPage(newPage)
   }
 
   return (
@@ -28,6 +37,25 @@ const AllTests = () => {
         {tests.map((test) => (
           <TestCard key={test._id} test={test} />
         ))}
+      </div>
+      <div className="flex justify-center my-8">
+        <button
+          disabled={page === 1}
+          onClick={() => handlePageChange(page - 1)}
+          className="mx-2 px-4 py-2 bg-blue-500 text-white rounded disabled:bg-gray-400"
+        >
+          Previous
+        </button>
+        <span className="mx-2 px-4 py-2">
+          Page {page} of {pagination.totalPages}
+        </span>
+        <button
+         disabled={page === pagination.totalPages}
+         onClick={() => handlePageChange(page + 1)}
+          className="mx-2 px-4 py-2 bg-blue-500 text-white rounded disabled:bg-gray-400"
+        >
+          Next
+        </button>
       </div>
     </div>
   );

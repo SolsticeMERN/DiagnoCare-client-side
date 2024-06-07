@@ -11,6 +11,7 @@ import "swiper/css/navigation";
 
 // import required modules
 import { Autoplay, Pagination, Navigation } from "swiper/modules";
+import LoadingSpinner from "../../../Shared/LoadingSpinner";
 
 const Recommend = () => {
   const axiosCommon = useAxiosCommon();
@@ -24,15 +25,15 @@ const Recommend = () => {
   });
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <LoadingSpinner/>;
   }
 
   if (isError) {
-    return <div>Error loading banners</div>;
+    return <LoadingSpinner/>;
   }
 
   if (recommends.length === 0) {
-    return <div>No banners available</div>;
+    return <LoadingSpinner/>;
   }
 
   return (

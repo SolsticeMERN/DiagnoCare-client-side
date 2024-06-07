@@ -13,6 +13,7 @@ import { Autoplay, Pagination, Navigation } from "swiper/modules";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosCommon from "../../Hooks/useAxiosCommon";
 import { Link } from "react-router-dom";
+import LoadingSpinner from "../../../Shared/LoadingSpinner";
 
 const Banner = () => {
   const axiosCommon = useAxiosCommon();
@@ -28,15 +29,15 @@ const Banner = () => {
   const banners = Array.isArray(bannersData) ? bannersData : [];
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <LoadingSpinner/>;
   }
 
   if (isError) {
-    return <div>Error loading banners</div>;
+    return <LoadingSpinner/>;
   }
 
   if (banners.length === 0) {
-    return <div>No banners available</div>;
+    return <LoadingSpinner/>;
   }
 
   return (

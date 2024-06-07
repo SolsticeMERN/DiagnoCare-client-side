@@ -3,6 +3,7 @@ import useAxiosSecure from "../../Pages/Hooks/useAxiosSecure";
 import toast from "react-hot-toast";
 import { useState } from "react";
 import SubmitTestResult from "../Modal/SubmitTestResult";
+import LoadingSpinner from "../../Shared/LoadingSpinner";
 
 const AllReservationTable = ({ reservations, isLoading, refetch }) => {
   const axiosSecure = useAxiosSecure();
@@ -43,7 +44,7 @@ const AllReservationTable = ({ reservations, isLoading, refetch }) => {
     setCurrentReservation(null);
   };
 
-  if (isLoading) return <p>Loading...</p>;
+  if (isLoading) return <LoadingSpinner />;
 
   return (
     <div>

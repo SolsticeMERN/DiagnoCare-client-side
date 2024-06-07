@@ -1,31 +1,24 @@
 import { useState } from "react";
 import UpdateBanner from "../Modal/UpdateBanner";
-
-
-
+import LoadingSpinner from "../../Shared/LoadingSpinner";
 
 const AllBannerTable = ({ banners, isLoading, refetch }) => {
   const [isOpen, setIsOpen] = useState(false);
-  
+
   const [updateBanner, setUpdateBanner] = useState(null);
-
-
 
   const updateBannerModal = (banner) => {
     setUpdateBanner(banner);
     setIsOpen(true);
   };
 
-
   const closeModal = () => {
     setIsOpen(false);
-    
+
     setUpdateBanner(null);
-    
   };
 
-  
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading) return <LoadingSpinner />;
 
   return (
     <div>
@@ -46,8 +39,12 @@ const AllBannerTable = ({ banners, isLoading, refetch }) => {
               <th scope="col" className="px-6 py-3">
                 Button Text
               </th>
-              <th scope="col" className="px-6 py-3">CouponCode</th>
-              <th scope="col" className="px-6 py-3">DiscountRate</th>
+              <th scope="col" className="px-6 py-3">
+                CouponCode
+              </th>
+              <th scope="col" className="px-6 py-3">
+                DiscountRate
+              </th>
               <th scope="col" className="px-6 py-3 text-center">
                 Status
               </th>
@@ -91,7 +88,9 @@ const AllBannerTable = ({ banners, isLoading, refetch }) => {
                 <td className="px-6 py-4">{banner?.description}</td>
                 <td className="px-6 py-4">{banner?.buttonText}</td>
                 <td className="px-6 py-4">{banner?.couponCode}</td>
-                <td className="px-6 py-4 text-center">{banner?.discountRate}</td>
+                <td className="px-6 py-4 text-center">
+                  {banner?.discountRate}
+                </td>
                 <td className="px-6 py-4">
                   <div className="flex items-center">
                     <div
@@ -119,7 +118,7 @@ const AllBannerTable = ({ banners, isLoading, refetch }) => {
       </div>
       {updateBanner && (
         <UpdateBanner
-        updateBanner={updateBanner}
+          updateBanner={updateBanner}
           closeModal={closeModal}
           isOpen={isOpen}
           refetch={refetch}

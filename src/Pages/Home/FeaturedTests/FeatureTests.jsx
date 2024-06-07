@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 
 import TestCard from "./TestCard";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
+import LoadingSpinner from "../../../Shared/LoadingSpinner";
 
 const FeatureTests = () => {
 const axiosSecure = useAxiosSecure()
@@ -15,7 +16,7 @@ const axiosSecure = useAxiosSecure()
   });
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <LoadingSpinner/>
   }
 
   return (

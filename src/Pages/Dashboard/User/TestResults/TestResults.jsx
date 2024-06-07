@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
+import LoadingSpinner from "../../../../Shared/LoadingSpinner";
 
 const TestResults = () => {
   const axiosSecure = useAxiosSecure();
@@ -17,7 +18,7 @@ const TestResults = () => {
     printWindow.print();
   };
 
-  if(isLoading) return <p>Loading...</p>
+  if(isLoading) return <LoadingSpinner/>
 
   return (
     <div>
@@ -43,7 +44,13 @@ const TestResults = () => {
           </tr>
         </thead>
         <tbody>
-          {testResults.map((result) => (
+          {testResults.length === 0 ? (
+              <tr>
+                <td colSpan="6" className="text-center py-4">
+                testResults not found
+                </td>
+              </tr>
+            ) : testResults.map((result) => (
             <tr
               key={result._id}
               className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"

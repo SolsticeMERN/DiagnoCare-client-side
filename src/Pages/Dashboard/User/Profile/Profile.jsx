@@ -4,6 +4,7 @@ import { useState } from "react";
 import UpdateProfileModal from "../../../../Components/Modal/UpdateProfileModal";
 import ChangePassword from "../../../../Components/Modal/ChangePassword";
 import useRole from "../../../Hooks/useRole";
+import LoadingSpinner from "../../../../Shared/LoadingSpinner";
 
 const Profile = () => {
   const { user, loading } = useAuth();
@@ -28,7 +29,7 @@ const Profile = () => {
     setIsModalOpenChange(false);
   };
 
-  if (loading) return <div>Loading.....</div>;
+  if (loading) return <LoadingSpinner/>;
 
   return (
     <div className="flex justify-center items-center ">

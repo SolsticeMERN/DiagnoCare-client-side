@@ -3,12 +3,13 @@ import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import { MdDeleteForever } from "react-icons/md";
 import toast from "react-hot-toast";
 import useAuth from "../../../Hooks/useAuth";
+import LoadingSpinner from "../../../../Shared/LoadingSpinner";
 
 const Bookings = () => {
   const axiosSecure = useAxiosSecure();
-  const {user} = useAuth()
+  const {user, loading} = useAuth()
 
-  const { data: bookings = [], refetch } = useQuery({
+  const { data: bookings = [], refetch, isLoading } = useQuery({
     queryKey: ["booking"],
     queryFn: async () => {
       const { data } = await axiosSecure.get(`/booking/${user?.email}`);
@@ -44,6 +45,9 @@ const Bookings = () => {
 
   }
 
+if(isLoading || loading) return <LoadingSpinner/>
+
+
   return (
     <div>
       <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
@@ -71,7 +75,13 @@ const Bookings = () => {
             </tr>
           </thead>
           <tbody>
-            {bookings.map((booking, index) => {
+            {bookings.length === 0 ? (
+              <tr>
+                <td colSpan="6" className="text-center py-4">
+                  Booking not found
+                </td>
+              </tr>
+            ) : bookings.map((booking, index) => {
               return (
                 <tr
                   key={index}

@@ -4,6 +4,7 @@ import toast from "react-hot-toast";
 import { useState } from "react";
 import UpdateTestModal from "../../../../Components/Modal/UpdateTestModal";
 import ViewReservationRoute from "../../../../Components/Modal/ViewReservationRoute";
+import LoadingSpinner from "../../../../Shared/LoadingSpinner";
 
 const ViewAllTests = () => {
   const axiosSecure = useAxiosSecure();
@@ -24,7 +25,7 @@ const ViewAllTests = () => {
     },
   });
 
-  if (isLoading) return <p>Loading...</p>;
+  if (isLoading) return <LoadingSpinner/>;
 
   const handleDelete = async (_id) => {
     const { data } = await axiosSecure.delete(`/test/${_id}`);

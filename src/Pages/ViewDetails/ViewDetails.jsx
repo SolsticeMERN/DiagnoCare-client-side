@@ -10,8 +10,6 @@ const ViewDetails = () => {
   const axiosSecure = useAxiosSecure()
   const [status] = useStatus()
 
-  console.log(status);
-
   const { data: testDetail = {}, refetch } = useQuery({
     queryKey: ["testDetail", id],
     queryFn: async () => {

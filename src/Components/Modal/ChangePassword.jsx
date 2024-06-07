@@ -1,5 +1,6 @@
 import toast from "react-hot-toast";
 import useAuth from "../../Pages/Hooks/useAuth";
+import LoadingSpinner from "../../Shared/LoadingSpinner";
 
 
 
@@ -25,7 +26,7 @@ const ChangePassword = ({ isModalOpenChange, handleCloseModalChange }) => {
     }
   };
 
-  if (loading) return <div>Loading.....</div>;
+  if (loading) return <LoadingSpinner/>;
 
   return (
     <>
