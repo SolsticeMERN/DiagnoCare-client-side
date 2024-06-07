@@ -63,7 +63,7 @@ const Bookings = () => {
                 Time
               </th>
               <th scope="col" className="px-6 py-3">
-                Status
+               Report Status
               </th>
               <th scope="col" className="px-6 py-3">
                 Action
@@ -101,27 +101,16 @@ const Bookings = () => {
                         booking.reportStatus === "pending" &&
                         "bg-yellow-100/30 text-yellow-500"
                       } ${
-                        booking.reportStatus === "In Progress" &&
-                        "bg-blue-100/30 text-blue-500"
-                      } ${
-                        booking.reportStatus === "Complete" &&
+                        booking.reportStatus === "delivered" &&
                         "bg-emerald-100/30 text-emerald-500"
-                      } ${
-                        booking.reportStatus === "Rejected" &&
-                        "bg-red-100/30 text-red-500"
-                      } `}
+                      }`}
                     >
                       <span
                         className={`h-1.5 w-1.5 rounded-full ${
                           booking.reportStatus === "pending" && "bg-yellow-500"
                         } ${
-                          booking.reportStatus === "In Progress" &&
-                          "bg-blue-500"
-                        } ${
-                          booking.reportStatus === "Complete" && "bg-green-500"
-                        } ${
-                          booking.reportStatus === "Rejected" && "bg-red-500"
-                        }  `}
+                          booking.reportStatus === "delivered" && "bg-green-500"
+                        }`}
                       ></span>
                       <h2 className="text-sm font-normal ">
                         {booking.reportStatus}

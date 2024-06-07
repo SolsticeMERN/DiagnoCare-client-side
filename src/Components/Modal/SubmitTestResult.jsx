@@ -24,15 +24,16 @@ const SubmitTestResult = ({ closeModal, isOpen, reservation }) => {
     const testResult = {
       ...reservation,
       pdf: data.pdf,
-      reportStatus: "submit"
-    };
-    delete testResult?._id
-
-    const res = await axiosSecure.post('/result', testResult);
-    if(res.data.insertedId) {
-        toast.success('Report Submit Successfully')
-        closeModal()
+      reportStatus: "delivered"
     }
+
+
+   const res = await axiosSecure.patch(`/booking/${reservation._id}`, testResult)
+   if(res.data.modifiedCount > 0) {
+    toast.success('Report Submit Successfully')
+        closeModal()
+   }
+
   };
 
   return (
