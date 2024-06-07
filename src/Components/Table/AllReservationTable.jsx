@@ -1,9 +1,13 @@
 import { useMutation } from "@tanstack/react-query";
 import useAxiosSecure from "../../Pages/Hooks/useAxiosSecure";
 import toast from "react-hot-toast";
+import { useState } from "react";
+import SubmitTestResult from "../Modal/SubmitTestResult";
 
 const AllReservationTable = ({ reservations, isLoading, refetch }) => {
   const axiosSecure = useAxiosSecure();
+  const [isOpen, setIsOpen] = useState(false);
+  const [currentReservation, setCurrentReservation] = useState(null);
 
   const { mutateAsync } = useMutation({
     mutationFn: async (_id) => {
@@ -12,8 +16,7 @@ const AllReservationTable = ({ reservations, isLoading, refetch }) => {
     },
     onSuccess: async (data) => {
       console.log(data);
-      toast.success("Reservation cancel successfully");
-
+      toast.success("Reservation canceled successfully");
       refetch();
     },
     onError: (err) => {
@@ -28,6 +31,16 @@ const AllReservationTable = ({ reservations, isLoading, refetch }) => {
     } catch (err) {
       console.log(err);
     }
+  };
+
+  const openModal = (reservation) => {
+    setCurrentReservation(reservation);
+    setIsOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsOpen(false);
+    setCurrentReservation(null);
   };
 
   if (isLoading) return <p>Loading...</p>;
@@ -112,6 +125,7 @@ const AllReservationTable = ({ reservations, isLoading, refetch }) => {
                 </td>
                 <td className="px-6 py-4">
                   <button
+                    onClick={() => openModal(reservation)}
                     type="button"
                     className="font-medium bg-slate-300 p-3 rounded-lg text-blue-600 dark:text-blue-500 hover:underline"
                   >
@@ -122,14 +136,14 @@ const AllReservationTable = ({ reservations, isLoading, refetch }) => {
             ))}
           </tbody>
         </table>
+        {currentReservation && (
+          <SubmitTestResult
+            isOpen={isOpen}
+            closeModal={closeModal}
+            reservation={currentReservation}
+          />
+        )}
       </div>
-      {/* {selectedreservation && (
-        <SeeDetailsModal
-          closeModal={closeModal}
-          isOpen={isOpen}
-          seeDetailsInfo={selectedreservation}
-        />
-      )} */}
     </div>
   );
 };
