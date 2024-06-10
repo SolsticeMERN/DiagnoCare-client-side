@@ -4,6 +4,7 @@ import useAxiosCommon from "../Hooks/useAxiosCommon";
 import TestCard from "../Home/FeaturedTests/TestCard";
 import LoadingSpinner from "../../Shared/LoadingSpinner";
 import { useState } from "react";
+import { Helmet } from "react-helmet-async";
 
 const AllTests = () => {
     const axiosCommon = useAxiosCommon();
@@ -30,6 +31,9 @@ const AllTests = () => {
 
   return (
     <div>
+      <Helmet>
+        <title>AllTests - DaignoCare</title>
+      </Helmet>
       <div className="my-20 ">
         <h2 className="text-5xl font-bold text-center">All Tests</h2>
       </div>

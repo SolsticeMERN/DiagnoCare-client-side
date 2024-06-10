@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import LoadingSpinner from "../../../../Shared/LoadingSpinner";
+import { Helmet } from "react-helmet-async";
 
 const TestResults = () => {
   const axiosSecure = useAxiosSecure();
@@ -22,6 +23,9 @@ const TestResults = () => {
 
   return (
     <div>
+      <Helmet>
+        <title>Test Results - DaignoCare</title>
+      </Helmet>
       <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
         <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
           <tr>

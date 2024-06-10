@@ -5,6 +5,7 @@ import useAuth from "../Hooks/useAuth";
 import toast from "react-hot-toast";
 import { FaRegEye } from "react-icons/fa6";
 import { FaRegEyeSlash } from "react-icons/fa6";
+import { Helmet } from "react-helmet-async";
 
 const Login = () => {
   const {
@@ -37,6 +38,9 @@ const Login = () => {
 
   return (
     <div>
+      <Helmet>
+        <title>Login - DaignoCare</title>
+      </Helmet>
       <div className="font-[sans-serif] text-[#333]">
         <div className="min-h-screen flex flex-col items-center justify-center">
           <div className="grid md:grid-cols-2 items-center gap-4 max-w-6xl w-full p-4 m-4 shadow-[0_2px_10px_-3px_rgba(6,81,237,0.3)] rounded-md">

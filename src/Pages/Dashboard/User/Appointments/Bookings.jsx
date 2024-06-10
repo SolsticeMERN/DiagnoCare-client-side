@@ -4,6 +4,7 @@ import { MdDeleteForever } from "react-icons/md";
 import toast from "react-hot-toast";
 import useAuth from "../../../Hooks/useAuth";
 import LoadingSpinner from "../../../../Shared/LoadingSpinner";
+import { Helmet } from "react-helmet-async";
 
 const Bookings = () => {
   const axiosSecure = useAxiosSecure();
@@ -50,6 +51,9 @@ if(isLoading || loading) return <LoadingSpinner/>
 
   return (
     <div>
+      <Helmet>
+        <title>My Bookings - DaignoCare</title>
+      </Helmet>
       <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
         <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
           <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">

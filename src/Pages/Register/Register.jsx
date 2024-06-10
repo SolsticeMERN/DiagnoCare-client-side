@@ -10,6 +10,7 @@ import { imageUpload } from "../../Components/ImageApi";
 import toast from "react-hot-toast";
 import useAxiosCommon from "../Hooks/useAxiosCommon";
 import { ImSpinner9 } from "react-icons/im";
+import { Helmet } from "react-helmet-async";
 
 const Register = () => {
   const {
@@ -71,6 +72,9 @@ const Register = () => {
 
   return (
     <div>
+      <Helmet>
+        <title>Register - DaignoCare</title>
+      </Helmet>
       <div className="font-[sans-serif] text-gray-800 bg-white max-w-4xl flex items-center mx-auto md:h-screen p-4">
         <div className="grid md:grid-cols-3 items-center shadow-[0_2px_10px_-3px_rgba(6,81,237,0.3)] rounded-xl overflow-hidden">
           <div className="max-md:order-1 flex flex-col justify-center space-y-16 max-md:mt-16 min-h-full bg-gradient-to-r from-gray-900 to-gray-700 lg:px-8 px-4 py-4">

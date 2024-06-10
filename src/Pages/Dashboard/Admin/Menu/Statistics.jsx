@@ -14,6 +14,7 @@ import {
   Legend,
 } from "recharts";
 import LoadingSpinner from "../../../../Shared/LoadingSpinner";
+import { Helmet } from "react-helmet-async";
 
 
 const colors = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042", "red", "pink"];
@@ -115,6 +116,9 @@ const Statistics = () => {
 
   return (
     <div>
+      <Helmet>
+        <title>Statistic - DaignoCare</title>
+      </Helmet>
       <section className="bg-white dark:bg-gray-900 rounded-lg">
         <div className="max-w-screen-xl px-4 py-8 mx-auto text-center lg:py-16 lg:px-6">
           <dl className="grid max-w-screen-md gap-8 mx-auto text-gray-900 sm:grid-cols-4 dark:text-white">

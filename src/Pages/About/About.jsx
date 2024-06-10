@@ -1,6 +1,11 @@
+import { Helmet } from "react-helmet-async";
+
 const About = () => {
   return (
     <div>
+      <Helmet>
+        <title>About - DaignoCare</title>
+      </Helmet>
       <section className="">
   <div className="container max-w-xl p-6 mx-auto space-y-12 lg:px-8 lg:max-w-7xl">
     <div>

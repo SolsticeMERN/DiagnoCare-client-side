@@ -1,8 +1,10 @@
+
 import image from "../../../assets/featured-parallax.jpg";
 import DoctorsCard from "./DoctorsCard";
 
 const Doctors = () => {
   return (
+    <>
     <div className="my-20">
       <div className="relative font-sans before:absolute before:w-full before:h-full before:inset-0 before:bg-black before:opacity-80 before:z-10 ">
         <img
@@ -26,6 +28,7 @@ const Doctors = () => {
         <div></div>
       </div>
     </div>
+    </>
   );
 };
 

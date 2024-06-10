@@ -5,6 +5,7 @@ import UpdateProfileModal from "../../../../Components/Modal/UpdateProfileModal"
 import ChangePassword from "../../../../Components/Modal/ChangePassword";
 import useRole from "../../../Hooks/useRole";
 import LoadingSpinner from "../../../../Shared/LoadingSpinner";
+import { Helmet } from "react-helmet-async";
 
 const Profile = () => {
   const { user, loading } = useAuth();
@@ -32,6 +33,10 @@ const Profile = () => {
   if (loading) return <LoadingSpinner/>;
 
   return (
+    <>
+    <Helmet>
+        <title>{user?.displayName} - DaignoCare</title>
+      </Helmet>
     <div className="flex justify-center items-center ">
       <div className="bg-white shadow-lg rounded-2xl w-full lg:w-3/5">
         <img
@@ -92,6 +97,7 @@ const Profile = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 

@@ -1,6 +1,6 @@
 import axios from "axios";
 const axiosCommon = axios.create({
-    baseURL: 'http://localhost:3000'
+    baseURL: 'https://b9a12-server-side-solstice-mern.vercel.app'
 })
 
 const useAxiosCommon = () => {

@@ -20,12 +20,14 @@ import Statistics from "../Pages/Dashboard/Admin/Menu/Statistics";
 import AdminRoute from "./AdminRoute";
 import Reservation from "../Pages/Dashboard/Admin/Menu/Reservation";
 import ViewAllTests from "../Pages/Dashboard/Admin/Menu/ViewAllTests";
+import DFaq from "../Pages/Home/FAQ/DFaq";
+import ErrorPage from "../Shared/ErrorPage";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Main />,
-    errorElement: <p>Error</p>,
+    errorElement: <ErrorPage/>,
     children: [
       {
         path: "/",
@@ -46,6 +48,10 @@ const router = createBrowserRouter([
       {
         path: "/viewDetails/:id",
         element: <ViewDetails />,
+      },
+      {
+        path: "/faq",
+        element: <DFaq />,
       },
     ],
   },

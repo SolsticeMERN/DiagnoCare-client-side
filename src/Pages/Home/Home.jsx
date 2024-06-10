@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet-async";
 import Banner from "./Banner/Banner";
 import Doctors from "./Doctor/Doctors";
 import FeatureTests from "./FeaturedTests/FeatureTests";
@@ -6,6 +7,10 @@ import Recommend from "./Recommend/Recommend";
 
 const Home = () => {
   return (
+    <>
+    <Helmet>
+        <title>Home - DaignoCare</title>
+      </Helmet>
     <div>
       <Banner />
       <div>
@@ -18,6 +23,7 @@ const Home = () => {
       <Doctors/>
       <Recommend/>
     </div>
+    </>
   );
 };
 

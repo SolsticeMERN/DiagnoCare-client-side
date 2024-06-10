@@ -5,6 +5,7 @@ import { useState } from "react";
 import UpdateTestModal from "../../../../Components/Modal/UpdateTestModal";
 import ViewReservationRoute from "../../../../Components/Modal/ViewReservationRoute";
 import LoadingSpinner from "../../../../Shared/LoadingSpinner";
+import { Helmet } from "react-helmet-async";
 
 const ViewAllTests = () => {
   const axiosSecure = useAxiosSecure();
@@ -14,7 +15,7 @@ const ViewAllTests = () => {
   const [selectedReservation, setSelectedReservation] = useState(null);
 
   const {
-    data: allTests,
+    data,
     isLoading,
     refetch,
   } = useQuery({
@@ -25,7 +26,9 @@ const ViewAllTests = () => {
     },
   });
 
-  if (isLoading) return <LoadingSpinner/>;
+  if (isLoading) return <LoadingSpinner />;
+
+  const allTests = data?.data || [];
 
   const handleDelete = async (_id) => {
     const { data } = await axiosSecure.delete(`/test/${_id}`);
@@ -54,40 +57,27 @@ const ViewAllTests = () => {
 
   const closeReservationModal = () => {
     setIsOpenReservationModal(false);
-    selectedReservation([]);
+    setSelectedReservation(null);
   };
 
   return (
     <div>
+      <Helmet>
+        <title>View All Tests - DaignoCare</title>
+      </Helmet>
       <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
         <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
           <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
             <tr>
               <th scope="col" className="p-4"></th>
-              <th scope="col" className="px-6 py-3">
-                Image
-              </th>
-              <th scope="col" className="px-6 py-3">
-                Title
-              </th>
-              <th scope="col" className="px-6 py-3">
-                Description
-              </th>
-              <th scope="col" className="px-6 py-3">
-                Price
-              </th>
-              <th scope="col" className="px-6 py-3">
-                Slots
-              </th>
-              <th scope="col" className="px-6 py-3">
-                Time
-              </th>
-              <th scope="col" className="px-6 py-3 text-center">
-                Action
-              </th>
-              <th scope="col" className="px-6 py-3 text-center">
-                Reservation
-              </th>
+              <th scope="col" className="px-6 py-3">Image</th>
+              <th scope="col" className="px-6 py-3">Title</th>
+              <th scope="col" className="px-6 py-3">Description</th>
+              <th scope="col" className="px-6 py-3">Price</th>
+              <th scope="col" className="px-6 py-3">Slots</th>
+              <th scope="col" className="px-6 py-3">Time</th>
+              <th scope="col" className="px-6 py-3 text-center">Action</th>
+              <th scope="col" className="px-6 py-3 text-center">Reservation</th>
             </tr>
           </thead>
           <tbody>

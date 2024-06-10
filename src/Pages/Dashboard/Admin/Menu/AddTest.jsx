@@ -3,6 +3,7 @@ import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import { imageUpload } from "../../../../Components/ImageApi";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 
 const AddTest = () => {
     const axiosSecure = useAxiosSecure()
@@ -44,6 +45,9 @@ const AddTest = () => {
 
   return (
     <div>
+      <Helmet>
+        <title>Add Test - DaignoCare</title>
+      </Helmet>
       <form
         onSubmit={handleSubmit(onSubmit)}
         className="max-w-xl mx-auto mt-5 bg-gray-700 p-4 rounded-lg"

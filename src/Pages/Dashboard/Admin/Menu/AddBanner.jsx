@@ -3,6 +3,7 @@ import { imageUpload } from "../../../../Components/ImageApi";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
+import { Helmet } from "react-helmet-async";
 
 const AddBanner = () => {
 
@@ -46,6 +47,9 @@ const AddBanner = () => {
 
     return (
         <div>
+          <Helmet>
+        <title>Add Banner - DaignoCare</title>
+      </Helmet>
            <form
         onSubmit={handleSubmit(onSubmit)}
         className="max-w-xl mx-auto mt-5 bg-gray-700 p-4 rounded-lg"

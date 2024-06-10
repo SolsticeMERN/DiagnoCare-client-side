@@ -153,6 +153,18 @@ const Navbar = () => {
               </li>
               <li>
                 <NavLink
+                  to="/doctors"
+                  className={({ isActive }) =>
+                    isActive
+                      ? "block py-2 px-3 md:p-0 bg-blue-700 font-semibold border-b-2 border-blue-500 md:bg-transparent text-gray-200 rounded-lg md:rounded-none md:text-blue-500 "
+                      : "text-gray-900 hover:text-blue-500 hover:border-b-2 hover:border-blue-500"
+                  }
+                >
+                  Doctors
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
                   to="/about"
                   className={({ isActive }) =>
                     isActive
@@ -161,6 +173,18 @@ const Navbar = () => {
                   }
                 >
                   About Us
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="/faq"
+                  className={({ isActive }) =>
+                    isActive
+                      ? "block py-2 px-3 md:p-0 bg-blue-700 font-semibold border-b-2 border-blue-500 md:bg-transparent text-gray-200 rounded-lg md:rounded-none md:text-blue-500 "
+                      : "text-gray-900 hover:text-blue-500 hover:border-b-2 hover:border-blue-500"
+                  }
+                >
+                  FAQ
                 </NavLink>
               </li>
               {user && status === 'active' ? (

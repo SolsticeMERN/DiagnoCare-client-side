@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import AllReservationTable from "../../../../Components/Table/AllReservationTable";
+import { Helmet } from "react-helmet-async";
 
 const Reservation = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -44,6 +45,9 @@ const Reservation = () => {
 
   return (
     <div>
+      <Helmet>
+        <title>Reservation - DaignoCare</title>
+      </Helmet>
       <div className="relative mt-1">
         <div className="absolute inset-y-0 rtl:inset-r-0 start-0 flex items-center ps-3 pointer-events-none">
           <svg

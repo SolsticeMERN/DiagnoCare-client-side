@@ -29,15 +29,17 @@ const Banner = () => {
   const banners = Array.isArray(bannersData) ? bannersData : [];
 
   if (isLoading) {
-    return <LoadingSpinner/>;
+    return <LoadingSpinner />;
   }
 
   if (isError) {
-    return <LoadingSpinner/>;
+    return <LoadingSpinner />;
   }
 
-  if (banners.length === 0) {
-    return <LoadingSpinner/>;
+  const activeBanners = banners.filter(banner => banner.isActive === "true");
+
+  if (activeBanners.length === 0) {
+    return <LoadingSpinner />;
   }
 
   return (
@@ -57,7 +59,7 @@ const Banner = () => {
         modules={[Autoplay, Pagination, Navigation]}
         className="mySwiper"
       >
-        {banners.map((banner) => (
+        {activeBanners.map((banner) => (
           <SwiperSlide key={banner._id}>
             <div className="relative font-sans before:absolute before:w-full before:h-full before:inset-0 before:bg-black before:opacity-50 before:z-10">
               <img
@@ -70,19 +72,19 @@ const Banner = () => {
                   {banner.title}
                 </h2>
                 <p className="sm:text-lg text-base text-center text-gray-200">
-                  {banner.text}
+                  {banner.description}
                 </p>
                 <div className="mt-6 text-white">
                   <p>Coupon Code: {banner.couponCode}</p>
                   <p>Discount Rate: {banner.discountRate}%</p>
                 </div>
-                <Link to={banner.buttonText === 'Book Appointment' && '/allTests' || banner.buttonText === 'Meet Our Doctors' && '/doctors'}>
-                <button 
-                  type="button"
-                  className="mt-12 bg-transparent text-white text-base py-3 px-6 border border-white rounded-lg hover:bg-white hover:text-black transition duration-300"
-                >
-                  {banner.buttonText}
-                </button>
+                <Link to={banner.buttonText === 'Book Appointment' ? '/allTests' : banner.buttonText === 'Meet Our Doctors' ? '/doctors' : '#'}>
+                  <button 
+                    type="button"
+                    className="mt-12 bg-transparent text-white text-base py-3 px-6 border border-white rounded-lg hover:bg-white hover:text-black transition duration-300"
+                  >
+                    {banner.buttonText}
+                  </button>
                 </Link>
               </div>
             </div>
