@@ -13,7 +13,7 @@ After clone this repo just run the command:
 
   
 My Website Name: MedConsultPro
-Website: https://assignment-10-medconsultpro.web.app
+Website: https://medconsultpro.netlify.app/
 
 Server link- https://github.com/SolsticeMERN/DiagnoCare-Server-Side
 
